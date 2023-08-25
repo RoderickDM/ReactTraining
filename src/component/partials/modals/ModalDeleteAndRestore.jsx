@@ -1,9 +1,11 @@
 import React from "react";
 import { FaTimes } from "react-icons/fa";
-import SpinnerButton from "../../../../../partials/spinners/SpinnerButton";
+import SpinnerButton from "../spinners/SpinnerButton";
+import { BsFillTrash3Fill } from "react-icons/bs";
+import { MdOutlineRestore } from "react-icons/md";
 
-function ModalAddRoles({ setIsShow }) {
-  const handleCloseRole = () => setIsShow(false);
+const ModalDeleteAndRestore = ({ setIsDelete, item, isRestore }) => {
+  const handleCloseRole = () => setIsRestore(false);
 
   return (
     <div>
@@ -14,7 +16,11 @@ function ModalAddRoles({ setIsShow }) {
       border-gray-400 rounded-md py-8 px-5 max-w-[420px] w-full "
         >
           <div className="modal__header relative">
-            <h3> Role </h3>
+            {isRestore ? (
+              <BsFillTrash3Fill className="fill-red-500 text-2xl mb-2" />
+            ) : (
+              <MdOutlineRestore className="fill-yellow-300 text-2xl mb-2" />
+            )}
             <button
               className="absolute -top-4 right-0 "
               onClick={handleCloseRole}
@@ -23,22 +29,17 @@ function ModalAddRoles({ setIsShow }) {
             </button>
           </div>
 
-          <div className="modal__body min-h-[30vh]">
-            <div className="form__wrap">
-              <label htmlFor="">Role</label>
-              <input type="text" />
-              <span className="error-show">*required</span>
-            </div>
-            <div className="form__wrap">
-              <label htmlFor="">Description</label>
-              <textarea name="" id="" cols="30" rows="10"></textarea>
-              <span className="error-show">*required</span>
-            </div>
+          <div className="modal__body">
+            <h3 className="mb-3">Are you sure?</h3>
+            <p>
+              {`You are about to ${isRestore ? "restore" : "delete"} 
+              ${item.name}, do you want to continue?`}
+            </p>
           </div>
 
           <div className="modal__action flex justify-end mt-6 gap-2 ">
             <button className="btn btn--accent">
-              Add <SpinnerButton />
+              Confirm <SpinnerButton />
             </button>
             <button className="btn btn--cancel" onClick={handleCloseRole}>
               Cancel
@@ -48,6 +49,6 @@ function ModalAddRoles({ setIsShow }) {
       </div>
     </div>
   );
-}
+};
 
-export default ModalAddRoles;
+export default ModalDeleteAndRestore;
