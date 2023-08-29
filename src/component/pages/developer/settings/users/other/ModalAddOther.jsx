@@ -3,14 +3,14 @@ import { FaTimes } from "react-icons/fa";
 import SpinnerButton from "../../../../../partials/spinners/SpinnerButton";
 import Modal from "../../../../../partials/structure/Modal";
 
-function ModalAddRoles({ setIsShow }) {
+function ModalAddOther({ setIsShow }) {
   const handleCloseRole = () => setIsShow(false);
 
   return (
     <>
       <Modal>
         <div className="modal__header relative">
-          <h3> Role </h3>
+          <h3> Other </h3>
           <button
             className="absolute -top-4 right-0 "
             onClick={handleCloseRole}
@@ -21,7 +21,7 @@ function ModalAddRoles({ setIsShow }) {
 
         <div className="modal__body min-h-[30vh]">
           <div className="form__wrap">
-            <label htmlFor="">Role</label>
+            <label htmlFor="">Add</label>
             <input type="text" />
             <span className="error-show">*required</span>
           </div>
@@ -45,4 +45,4 @@ function ModalAddRoles({ setIsShow }) {
   );
 }
 
-export default ModalAddRoles;
+export default ModalAddOther;

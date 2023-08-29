@@ -128,9 +128,15 @@
 }
 
 @layer components {
+  .dropdown__link {
+    @apply text-white border-l-2 hover:!border-accent duration-150 hover:!border-l-2 border-transparent pl-2 w-fit inline-block py-1;
+  }
   .nav__link a,
   .nav__link button {
     @apply mb-1 w-full flex gap-3 items-center text-white py-1 px-2 rounded-md hover:bg-[#436c8a];
+  }
+  .nav__link.active button {
+    @apply bg-[#436c8a] text-accent;
   }
   .nav__link a.active,
   .nav__link button.active {
@@ -181,7 +187,7 @@
   }
 
   .main__grid {
-    @apply grid grid-cols-[0px_1fr] lg:grid-cols-[200px_1fr] min-h-[calc(100vh_-_66px)] lg:min-h-[calc(100vh_-_82px)] gap-0 lg:gap-8 transition-all;
+    @apply grid grid-cols-[0px_1fr] lg:grid-cols-[200px_1fr] min-h-[calc(100vh_-_66px)] lg:min-h-[calc(100vh_-_66px)] gap-0 lg:gap-8 transition-all;
   }
   .breadcrumbs__link {
     @apply text-[12px] opacity-70 hover:underline relative after:content-['/'] after:absolute after:top-0 after:-right-[15px] last:after:hidden last:opacity-100 last:pointer-events-none;

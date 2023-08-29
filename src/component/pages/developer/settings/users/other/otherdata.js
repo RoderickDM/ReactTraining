@@ -1,4 +1,4 @@
-export const roles = [
+export const otherdata = [
   {
     id: 1,
     name: "Admin",

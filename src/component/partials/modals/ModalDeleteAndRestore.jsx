@@ -5,7 +5,7 @@ import { BsFillTrash3Fill } from "react-icons/bs";
 import { MdOutlineRestore } from "react-icons/md";
 
 const ModalDeleteAndRestore = ({ setIsDelete, item, isRestore }) => {
-  const handleCloseRole = () => setIsRestore(false);
+  const handleCloseRole = () => setIsDelete(false);
 
   return (
     <div>
@@ -17,9 +17,9 @@ const ModalDeleteAndRestore = ({ setIsDelete, item, isRestore }) => {
         >
           <div className="modal__header relative">
             {isRestore ? (
-              <BsFillTrash3Fill className="fill-red-500 text-2xl mb-2" />
-            ) : (
               <MdOutlineRestore className="fill-yellow-300 text-2xl mb-2" />
+            ) : (
+              <BsFillTrash3Fill className="fill-red-500 text-2xl mb-2" />
             )}
             <button
               className="absolute -top-4 right-0 "

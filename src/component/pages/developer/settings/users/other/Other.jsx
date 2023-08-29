@@ -1,11 +1,11 @@
 import React from "react";
 import Header from "../../../../../partials/Header";
 import Navigation from "../../../../../partials/Navigation";
-import RoleTable from "./RoleTable";
-import ModalAddRoles from "./ModalAddRoles";
 import BreadCrumbs from "../../../../../partials/Breadcrumbs";
+import OtherTable from "./OtherTable";
+import ModalAddOther from "./ModalAddOther";
 
-const Roles = () => {
+const Other = () => {
   const [isShow, setIsShow] = React.useState(false);
 
   const handleAddRole = () => setIsShow(!isShow);
@@ -15,24 +15,24 @@ const Roles = () => {
       <Header />
       <section className="main__grid">
         <aside>
-          <Navigation  menu="settings" submenu="users"/>
+          <Navigation />
         </aside>
         <main className="pr-10">
           <BreadCrumbs />
           <div className="flex justify-between items-center my-5">
-            <h1>Roles</h1>
+            <h1>Other</h1>
             <button className="btn btn--accent btn--sm" onClick={handleAddRole}>
               Add
             </button>
           </div>
 
-          <RoleTable />
+          <OtherTable />
         </main>
       </section>
 
-      {isShow && <ModalAddRoles setIsShow={setIsShow} />}
+      {isShow && <ModalAddOther setIsShow={setIsShow} />}
     </>
   );
 };
 
-export default Roles;
+export default Other;
