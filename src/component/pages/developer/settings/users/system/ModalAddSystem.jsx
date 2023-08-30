@@ -3,8 +3,11 @@ import { FaTimes } from "react-icons/fa";
 import SpinnerButton from "../../../../../partials/spinners/SpinnerButton";
 import Modal from "../../../../../partials/structure/Modal";
 
-function ModalAddSystem({ setIsShow }) {
-  const handleCloseRole = () => setIsShow(false);
+function ModalAddSystem({ setIsShow, itemEdit, setItemEdit }) {
+  const handleCloseRole = () => {
+    setItemEdit([]);
+    setIsShow(false);
+  };
 
   return (
     <>
@@ -21,19 +24,19 @@ function ModalAddSystem({ setIsShow }) {
         <div className="modal__body min-h-[20vh]">
           <div className="form__wrap">
             <label htmlFor="">Role</label>
-            <input type="text" />
+            <input type="text" value={itemEdit ? itemEdit.name : ""} />
             <span className="error-show">*required</span>
           </div>
           <div className="form__wrap">
             <label htmlFor="">Email</label>
-            <input type="text" />
+            <input type="text" value={itemEdit ? itemEdit.email : ""} />
             <span className="error-show">*required</span>
           </div>
         </div>
 
         <div className="modal__action flex justify-end mt-6 gap-2 ">
           <button className="btn btn--accent">
-            Add <SpinnerButton />
+            {itemEdit.length === 0 ? "Add" : "Save"} <SpinnerButton />
           </button>
           <button className="btn btn--cancel" onClick={handleCloseRole}>
             Cancel

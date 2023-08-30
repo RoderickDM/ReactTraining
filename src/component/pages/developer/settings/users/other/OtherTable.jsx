@@ -9,8 +9,11 @@ import TableLoading from "../../../../../partials/TableLoading.jsx";
 import ModalConfirm from "../../../../../partials/modals/ModalConfirm.jsx";
 import ModalDeleteAndRestore from "../../../../../partials/modals/ModalDeleteAndRestore.jsx";
 import Footer from "../../../../../partials/Footer.jsx";
+import Searchbar from "../../../../../partials/Searchbar.jsx";
+import Loadmore from "../../../../../partials/Loadmore.jsx";
+import NoData from "../../../../../partials/NoData.jsx";
 
-const OtherTable = () => {
+const OtherTable = ({ setIsShow, setItemEdit }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isArchive, setIsArchive] = React.useState(false);
   const [isDelete, setIsDelete] = React.useState(false);
@@ -31,6 +34,10 @@ const OtherTable = () => {
     setIsDelete(true);
     setIsRestore(true);
   };
+  const handleEdit = (item) => {
+    setItemEdit(item);
+    setIsShow(true);
+  };
 
   const activeRoles = otherdata.filter((item) => {
     return item.status === 1;
@@ -50,79 +57,102 @@ const OtherTable = () => {
     loadData();
   }, []);
   return (
-    <div>
-      {isLoading ? (
-        <TableLoading count={20} cols={3} />
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Status</th>
-              <th className="action"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {otherdata.map((item, key) => (
-              <tr key={key}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.description}</td>
-                <td>
-                  {item.status === 1 ? (
-                    <Pills label="Active" bgc="bg-green-800" />
-                  ) : (
-                    <Pills label="Inactive" bgc="bg-gray-500" />
-                  )}
-                </td>
-                <td className="table__action">
-                  {item.status === 1 ? (
-                    <ul className="flex items-center gap-4">
-                      <li>
-                        <button className="tooltip" data-tooltip="Edit">
-                          <AiFillEdit />
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="tooltip"
-                          data-tooltip="Archive"
-                          onClick={() => handleArchive(item)}
-                        >
-                          <BsFillArchiveFill />
-                        </button>
-                      </li>
-                    </ul>
-                  ) : (
-                    <ul className="flex items-center gap-4">
-                      <li>
-                        <button
-                          className="tooltip"
-                          data-tooltip="Delete"
-                          onClick={() => handleDelete(item)}
-                        >
-                          <BsFillTrash3Fill />
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="tooltip"
-                          data-tooltip="Restore"
-                          onClick={() => handleRestore(item)}
-                        >
-                          <MdOutlineRestore />
-                        </button>
-                      </li>
-                    </ul>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+    <>
+      <Searchbar />
+      <div className="table__wrapper overflow-x-auto">
+        {isLoading ? (
+          <TableLoading count={20} cols={3} />
+        ) : (
+          <>
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th className="action"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {isLoading ||
+                  (otherdata.length === 0 && (
+                    <tr className="text-center ">
+                      <td colSpan="100%" className="p-10">
+                        {isLoading ? (
+                          <TableLoading count={20} cols={3} />
+                        ) : (
+                          <NoData />
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+
+                {otherdata.map((item, key) => (
+                  <tr key={key}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.description}</td>
+                    <td>
+                      {item.status === 1 ? (
+                        <Pills label="Active" bgc="bg-green-800" />
+                      ) : (
+                        <Pills label="Inactive" bgc="bg-gray-500" />
+                      )}
+                    </td>
+                    <td className="table__action">
+                      {item.status === 1 ? (
+                        <ul className="flex items-center gap-4">
+                          <li>
+                            <button
+                              className="tooltip"
+                              data-tooltip="Edit"
+                              onClick={() => handleEdit(item)}
+                            >
+                              <AiFillEdit />
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="tooltip"
+                              data-tooltip="Archive"
+                              onClick={() => handleArchive(item)}
+                            >
+                              <BsFillArchiveFill />
+                            </button>
+                          </li>
+                        </ul>
+                      ) : (
+                        <ul className="flex items-center gap-4">
+                          <li>
+                            <button
+                              className="tooltip"
+                              data-tooltip="Delete"
+                              onClick={() => handleDelete(item)}
+                            >
+                              <BsFillTrash3Fill />
+                            </button>
+                          </li>
+                          <li>
+                            <button
+                              className="tooltip"
+                              data-tooltip="Restore"
+                              onClick={() => handleRestore(item)}
+                            >
+                              <MdOutlineRestore />
+                            </button>
+                          </li>
+                        </ul>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <Loadmore />
+          </>
+        )}
+      </div>
       <Footer
         record={otherdata.length}
         active={activeRoles.length}
@@ -137,7 +167,7 @@ const OtherTable = () => {
           isRestore={isRestore}
         />
       )}
-    </div>
+    </>
   );
 };
 

@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../../../../../partials/Header";
 import Navigation from "../../../../../partials/Navigation";
-import BreadCrumbs from "../../../../../partials/Breadcrumbs";
 import SystemTable from "./SystemTable";
 import ModalAddSystem from "./ModalAddSystem";
+import BreadCrumbs from "../../../../../partials/BreadCrumbs";
 
 const System = () => {
   const [isShow, setIsShow] = React.useState(false);
-
+  const [itemEdit, setItemEdit] = React.useState(false);
   const handleAddRole = () => setIsShow(!isShow);
 
   return (
@@ -17,7 +17,7 @@ const System = () => {
         <aside>
           <Navigation />
         </aside>
-        <main className="pr-10">
+        <main className="px-4 lg:px-0 lg:pr-10 overflow-x-hidden">
           <BreadCrumbs />
           <div className="flex justify-between items-center my-5">
             <h1>System</h1>
@@ -26,11 +26,17 @@ const System = () => {
             </button>
           </div>
 
-          <SystemTable />
+          <SystemTable setIsShow={setIsShow} setItemEdit={setItemEdit} />
         </main>
       </section>
 
-      {isShow && <ModalAddSystem setIsShow={setIsShow} />}
+      {isShow && (
+        <ModalAddSystem
+          setIsShow={setIsShow}
+          itemEdit={itemEdit}
+          setItemEdit={setItemEdit}
+        />
+      )}
     </>
   );
 };

@@ -3,8 +3,11 @@ import { FaTimes } from "react-icons/fa";
 import SpinnerButton from "../../../../../partials/spinners/SpinnerButton";
 import Modal from "../../../../../partials/structure/Modal";
 
-function ModalAddRoles({ setIsShow }) {
-  const handleCloseRole = () => setIsShow(false);
+const ModalAddRoles = ({ setIsShow, itemEdit, setItemEdit }) => {
+  const handleCloseRole = () => {
+    setItemEdit([]);
+    setIsShow(false);
+  };
 
   return (
     <>
@@ -22,19 +25,26 @@ function ModalAddRoles({ setIsShow }) {
         <div className="modal__body min-h-[30vh]">
           <div className="form__wrap">
             <label htmlFor="">Role</label>
-            <input type="text" />
+            <input type="text" value={itemEdit ? itemEdit.name : ""} />
             <span className="error-show">*required</span>
           </div>
           <div className="form__wrap">
             <label htmlFor="">Description</label>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              value={itemEdit ? itemEdit.description : ""}
+            ></textarea>
             <span className="error-show">*required</span>
           </div>
         </div>
 
         <div className="modal__action flex justify-end mt-6 gap-2 ">
           <button className="btn btn--accent">
-            Add <SpinnerButton />
+            {itemEdit.length === 0 ? "Add" : "Save"}
+            <SpinnerButton />
           </button>
           <button className="btn btn--cancel" onClick={handleCloseRole}>
             Cancel
@@ -43,6 +53,6 @@ function ModalAddRoles({ setIsShow }) {
       </Modal>
     </>
   );
-}
+};
 
 export default ModalAddRoles;

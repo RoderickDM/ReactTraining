@@ -13,7 +13,7 @@ import NoData from "../../../../../partials/NoData.jsx";
 import Loadmore from "../../../../../partials/Loadmore.jsx";
 import Searchbar from "../../../../../partials/Searchbar.jsx";
 
-const RoleTable = () => {
+const RoleTable = ({ setIsShow, setItemEdit }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isArchive, setIsArchive] = React.useState(false);
   const [isDelete, setIsDelete] = React.useState(false);
@@ -33,6 +33,11 @@ const RoleTable = () => {
     setItem(item);
     setIsDelete(true);
     setIsRestore(true);
+  };
+
+  const handleEdit = (item) => {
+    setItemEdit(item);
+    setIsShow(true);
   };
 
   const activeRoles = roles.filter((item) => {
@@ -100,7 +105,11 @@ const RoleTable = () => {
                       {item.status === 1 ? (
                         <ul className="flex items-center gap-4">
                           <li>
-                            <button className="tooltip" data-tooltip="Edit">
+                            <button
+                              className="tooltip"
+                              data-tooltip="Edit"
+                              onClick={() => handleEdit(item)}
+                            >
                               <AiFillEdit />
                             </button>
                           </li>
@@ -144,21 +153,21 @@ const RoleTable = () => {
             <Loadmore />
           </div>
         )}
-        <Footer
-          record={roles.length}
-          active={activeRoles.length}
-          inactive={inactiveRoles.length}
-        />
-
-        {isArchive && <ModalConfirm setIsArchive={setIsArchive} item={item} />}
-        {isDelete && (
-          <ModalDeleteAndRestore
-            setIsDelete={setIsDelete}
-            item={item}
-            isRestore={isRestore}
-          />
-        )}
       </div>
+      <Footer
+        record={roles.length}
+        active={activeRoles.length}
+        inactive={inactiveRoles.length}
+      />
+
+      {isArchive && <ModalConfirm setIsArchive={setIsArchive} item={item} />}
+      {isDelete && (
+        <ModalDeleteAndRestore
+          setIsDelete={setIsDelete}
+          item={item}
+          isRestore={isRestore}
+        />
+      )}
     </>
   );
 };

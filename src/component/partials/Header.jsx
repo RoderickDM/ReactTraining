@@ -11,6 +11,7 @@ const Header = () => {
   const ref = React.useRef();
   const refMenu = React.useRef();
   const handleShow = () => setShow(!show);
+  // const [navBar, setNavbar] = React.useState(false);
 
   const handleClickOutside = (e) => {
     if (!ref.current.contains(e.target)) {
@@ -25,7 +26,12 @@ const Header = () => {
   return (
     <>
       <header className="flex justify-between py-2 px-6 relative">
-        <div className="w-fit">
+        <div className="w-fit flex items-center gap-4">
+          <div className="lg:hidden">
+            <span className="block w-8 h-1 bg-gray-400 rounded-full"></span>
+            <span className="block w-8 h-1 bg-gray-400 rounded-full my-1"></span>
+            <span className="block w-8 h-1 bg-gray-400 rounded-full"></span>
+          </div>
           <Logo />
         </div>
         <div className="flex items-center gap-3" onClick={handleShow} ref={ref}>

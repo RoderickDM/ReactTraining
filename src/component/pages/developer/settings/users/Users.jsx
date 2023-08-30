@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "../../../../partials/Header";
-import Breadcrumbs from "../../../../partials/Breadcrumbs";
 import Navigation from "../../../../partials/Navigation";
 import { BiCaretRight } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import BreadCrumbs from "../../../../partials/BreadCrumbs";
 const Users = () => {
   return (
     <>
@@ -12,13 +12,13 @@ const Users = () => {
         <aside>
           <Navigation />
         </aside>
-        <main className="pr-10">
-          <Breadcrumbs />
+        <main className="lg:pr-10 mx-4 lg:mx-0">
+          <BreadCrumbs />
           <div className="flex justify-between items-center my-5">
             <h1>Users</h1>
           </div>
 
-          <div className="mt-5 w-full max-w-[650px]">
+          <div className="mt-5 lg:max-w-[650px] md:max-w-[650px] ">
             <Link
               to="/settings/users/systems"
               className="block border-b border-gray-200 hover:bg-gray-50"
@@ -34,7 +34,7 @@ const Users = () => {
               </div>
             </Link>
           </div>
-          <div className="mt-5 w-full max-w-[650px]">
+          <div className="mt-5 lg:max-w-[650px] md:max-w-[650px]">
             <Link
               to="/settings/users/other"
               className="block border-b border-gray-200 hover:bg-gray-50"
@@ -50,7 +50,7 @@ const Users = () => {
               </div>
             </Link>
           </div>
-          <div className="mt-5 w-full max-w-[650px]">
+          <div className="mt-5 lg:max-w-[650px] md:max-w-[650px]">
             <Link
               to="/settings/users/roles"
               className="block border-b border-gray-200 hover:bg-gray-50"
