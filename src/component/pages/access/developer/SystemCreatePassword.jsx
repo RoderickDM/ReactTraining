@@ -6,12 +6,14 @@ import ModalValidate from "../../../partials/modals/ModalValidate";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { BsCheckCircleFill } from "react-icons/bs";
+import SpinnerWindow from "../../../partials/spinners/SpinnerWindow";
 const SystemCreatePassword = () => {
   const [isPasswordShow, setIsPasswordShow] = React.useState(false);
   const [isConfirmPasswordShow, setIsConfirmPasswordShow] =
     React.useState(false);
   const [isValid, setIsValid] = React.useState(false);
   const [isLoading, setLoading] = React.useState(false);
+  const [isLoadingSpinner, setLoadingSpinner] = React.useState(false);
   const [isSuccess, setSuccess] = React.useState(false);
   const handleSubmit = () => {
     setLoading(true);
@@ -24,8 +26,19 @@ const SystemCreatePassword = () => {
   const handleShowConfirmPassword = () =>
     setIsConfirmPasswordShow(!isConfirmPasswordShow);
 
+  React.useEffect(() => {
+    function spinnerOn() {
+      setLoadingSpinner(true);
+      setTimeout(() => {
+        setLoadingSpinner(false);
+      }, 2000);
+    }
+    spinnerOn();
+  }, []);
+
   return (
     <>
+      {isLoadingSpinner && <SpinnerWindow />}
       <div className="h-screen w-full flex justify-center items-center">
         <div className="login w-full max-w-[380px] border border-gray-200 py-8 px-4 rounded-md shadow-sm">
           <div className="flex justify-center">

@@ -12,6 +12,7 @@ import Footer from "../../../../../partials/Footer.jsx";
 import NoData from "../../../../../partials/NoData.jsx";
 import Loadmore from "../../../../../partials/Loadmore.jsx";
 import Searchbar from "../../../../../partials/Searchbar.jsx";
+import ServerError from "../../../../../partials/ServerError.jsx";
 
 const RoleTable = ({ setIsShow, setItemEdit }) => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -76,19 +77,23 @@ const RoleTable = ({ setIsShow, setItemEdit }) => {
                 </tr>
               </thead>
               <tbody>
-                {isLoading ||
+                {/* {isLoading ||
                   (roles.length === 0 && (
-                    <tr className="text-center ">
-                      <td colSpan="100%" className="p-10">
-                        {isLoading ? (
-                          <TableLoading count={20} cols={3} />
-                        ) : (
-                          <NoData />
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-
+                    // <tr className="text-center ">
+                    //   <td colSpan="100%" className="p-10">
+                    //     {isLoading ? (
+                    //       <TableLoading count={20} cols={3} />
+                    //     ) : (
+                    //       <NoData />
+                    //     )}
+                    //   </td>
+                    // </tr>
+                  ))} */}
+                <tr className="text-center">
+                  <td colSpan="100%" className="p-10">
+                    <ServerError />
+                  </td>
+                </tr>
                 {roles.map((item, key) => (
                   <tr key={key}>
                     <td>{item.id}</td>

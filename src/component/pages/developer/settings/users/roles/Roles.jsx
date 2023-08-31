@@ -4,10 +4,14 @@ import Navigation from "../../../../../partials/Navigation";
 import RoleTable from "./RoleTable";
 import ModalAddRoles from "./ModalAddRoles";
 import BreadCrumbs from "../../../../../partials/BreadCrumbs";
+import Toast from "../../../../../partials/Toast";
+import ModalError from "../../../../../partials/modals/ModalError";
 
 const Roles = () => {
   const [isShow, setIsShow] = React.useState(false);
   const [itemEdit, setItemEdit] = React.useState([]);
+  const [isSuccess, setSuccess] = React.useState(false);
+  const [isError, setError] = React.useState(false);
   const handleAddRole = () => setIsShow(!isShow);
 
   return (
@@ -35,8 +39,12 @@ const Roles = () => {
           setIsShow={setIsShow}
           itemEdit={itemEdit}
           setItemEdit={setItemEdit}
+          setSuccess={setSuccess}
         />
       )}
+      {isSuccess && <Toast setSuccess={setSuccess} />}
+
+      {isError && <ModalError setError={setError} />}
     </>
   );
 };
